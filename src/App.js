@@ -1,7 +1,9 @@
 import React from 'react';
+import { Route, Link } from "react-router-dom";
 import './css/pure-min.css';
 import './css/side-menu.css';
 import AutorBox from './components/Autor';
+import Home from './components/Home';
     
 export default function App() {
     return (
@@ -12,24 +14,18 @@ export default function App() {
 
             <div id="menu">
                 <div className="pure-menu">
-                    <a className="pure-menu-heading" href="#">Company</a>
+                    <a className="pure-menu-heading" href="/">Company</a>
 
                     <ul className="pure-menu-list">
-                        <li className="pure-menu-item"><a href="#" className="pure-menu-link">Home</a></li>
-                        <li className="pure-menu-item"><a href="#" className="pure-menu-link">Livros</a></li>
-                        <li className="pure-menu-item"><a href="#" className="pure-menu-link">Autores</a></li>
+                        <li className="pure-menu-item"><Link to="/" className="pure-menu-link">Home</Link></li>
+                        <li className="pure-menu-item"><Link to="/livro" className="pure-menu-link">Livros</Link></li>
+                        <li className="pure-menu-item"><Link to="/autor" className="pure-menu-link">Autores</Link></li>
                     </ul>
                 </div>
             </div>
 
-            <div id="main">
-                <div className="header">
-                    <h1>Cadastro de Autores</h1>
-                </div>
-            </div>
-            <div className="content" id="content">
-                <AutorBox />
-            </div>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/autor" component={AutorBox} />
         </div>
     );
 };

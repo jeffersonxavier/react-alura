@@ -87,7 +87,7 @@ export default class AutorBox extends Component {
         this.state = { lista: [] };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         axios.get('http://localhost:8080/api/autores')
             .then(res => {
                 this.setState({ lista: res.data });
@@ -101,8 +101,15 @@ export default class AutorBox extends Component {
     render() {
         return (
             <div>
-                <FormularioAutor />
-                <TabelaAutores lista={this.state.lista} />
+                <div id="main">
+                    <div className="header">
+                        <h1>Cadastro de Autores!</h1>
+                    </div>
+                </div>
+                <div className="content" id="content">
+                    <FormularioAutor />
+                    <TabelaAutores lista={this.state.lista} />
+                </div>
             </div>
         );
     }
