@@ -4,6 +4,7 @@ import './css/pure-min.css';
 import './css/side-menu.css';
 import AutorBox from './components/Autor';
 import Home from './components/Home';
+import LivroBox from './components/Livro';
     
 export default function App() {
     return (
@@ -26,6 +27,7 @@ export default function App() {
 
             <Route exact path="/" component={Home} />
             <Route exact path="/autor" component={AutorBox} />
+            <Route exact path="/livro" component={LivroBox} />
         </div>
     );
 };

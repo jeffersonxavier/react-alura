@@ -9,7 +9,6 @@ ReactDOM.render(
     (
         <Router>
             <Route path="/" component={App}/>
-            <Route path="/livro"/>
         </Router>
     ),
     document.getElementById('root')
