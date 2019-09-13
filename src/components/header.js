@@ -1,21 +1,21 @@
-import React from 'react'
+import React from 'react';
 
 export default function Header() {
   return(
-    <header class="header container">
-      <h1 class="header-logo">
+    <header className="header container">
+      <h1 className="header-logo">
         Instalura
       </h1>
 
-      <form class="header-busca">
-        <input type="text" name="search" placeholder="Pesquisa" class="header-busca-campo"/>
-        <input type="submit" value="Buscar" class="header-busca-submit"/>
+      <form className="header-busca">
+        <input type="text" name="search" placeholder="Pesquisa" className="header-busca-campo"/>
+        <input type="submit" value="Buscar" className="header-busca-submit"/>
       </form>
 
 
       <nav>
-        <ul class="header-nav">
-          <li class="header-nav-item">
+        <ul className="header-nav">
+          <li className="header-nav-item">
             <a href="/">
               {/* ♡
               <!--                 ♥-->

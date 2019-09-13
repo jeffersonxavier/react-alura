@@ -4,7 +4,7 @@ import Timeline from './components/timeline';
 
 function App() {
   return (
-    <div class="main">
+    <div className="main">
       <Header />
       <Timeline />
     </div>
