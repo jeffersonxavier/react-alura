@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 
 export default class Login extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { msg: '' };
+    const params = queryString.parse(this.props.location.search);
+    this.state = { msg: params && params.msg ? params.msg : '' };
   }
   
   sigin(event) {

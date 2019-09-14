@@ -7,10 +7,11 @@ import './css/reset.css';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import Login from './components/login';
+import Logout from './components/logout';
 
 function verifyAuthentication() {
   if (!localStorage.getItem('authToken') || !localStorage.getItem('authToken').length) {
-    return <Redirect to="/"></Redirect>
+    return <Redirect to="/?msg=É necessário estar logado"></Redirect>
   } else {
     return <App/>
   }
@@ -20,6 +21,7 @@ ReactDOM.render(
   (
     <BrowserRouter>
       <Route exact path="/" component={Login}/>
+      <Route exact path="/logout" component={Logout}/>
       <Route exact path="/timeline" render={verifyAuthentication}/>
     </BrowserRouter>
   ),
