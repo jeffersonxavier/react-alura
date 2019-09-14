@@ -6,7 +6,7 @@ function PhotoHeader({ photo }) {
       <figure className="foto-usuario">
         <img src={photo.urlPerfil} alt="foto do usuario"/>
         <figcaption className="foto-usuario">
-          <a href="/">{photo.loginUsario}</a>
+          <a href="/">{photo.loginUsuario}</a>
         </figcaption>
       </figure>
       <time className="foto-data">{photo.horario}</time>

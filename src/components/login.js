@@ -20,10 +20,14 @@ export default class Login extends Component {
       if (res.ok) {
         return res.text();
       } else {
-        this.setState({ msg: 'Login Inválido!' });
+        throw new Error('Login Inválido!');
       }
     })
-    .then(token => console.log(token));
+    .then(token => {
+      localStorage.setItem('authToken', token);
+      this.props.history.push('/timeline');
+    })
+    .catch(error => this.setState({ msg: error.message }))
   }
 
   render() {

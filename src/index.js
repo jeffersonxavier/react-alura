@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import './css/timeline.css';
 import './css/login.css';
 import './css/reset.css';
@@ -10,10 +10,10 @@ import Login from './components/login';
 
 ReactDOM.render(
   (
-    <Router>
+    <BrowserRouter>
       <Route exact path="/" component={Login}/>
       <Route exact path="/timeline" component={App}/>
-    </Router>
+    </BrowserRouter>
   ),
   document.getElementById('root')
 );
