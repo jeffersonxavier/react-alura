@@ -8,10 +8,21 @@ export default class Timeline extends Component {
     this.state = { photos: [] };
   }
   
-
   componentDidMount() {
+    this._loadPhotos(this.props);
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this._loadPhotos(nextProps);
+  }
+
+  _loadPhotos(props) {
     const token = localStorage.getItem('authToken');
-    fetch(`http://localhost:8080/api/fotos?X-AUTH-TOKEN=${token}`)
+    let url = `http://localhost:8080/api/fotos?X-AUTH-TOKEN=${token}`;
+    if (props.login && props.login.length)
+      url = `http://localhost:8080/api/public/fotos/${props.login}`;
+
+    fetch(url)
       .then(res => res.json())
       .then(photos => this.setState({ photos }));
   }

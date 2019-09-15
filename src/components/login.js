@@ -29,7 +29,7 @@ export default class Login extends Component {
       localStorage.setItem('authToken', token);
       this.props.history.push('/timeline');
     })
-    .catch(error => this.setState({ msg: error.message }))
+    .catch(error => this.setState({ msg: error.message }));
   }
 
   render() {

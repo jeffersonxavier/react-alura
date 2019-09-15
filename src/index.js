@@ -23,6 +23,7 @@ ReactDOM.render(
       <Route exact path="/" component={Login}/>
       <Route exact path="/logout" component={Logout}/>
       <Route exact path="/timeline" render={verifyAuthentication}/>
+      <Route exact path="/timeline/:login" component={App} />
     </BrowserRouter>
   ),
   document.getElementById('root')

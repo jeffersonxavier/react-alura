@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function PhotoHeader({ photo }) {
   return (
@@ -6,7 +7,9 @@ function PhotoHeader({ photo }) {
       <figure className="foto-usuario">
         <img src={photo.urlPerfil} alt="foto do usuario"/>
         <figcaption className="foto-usuario">
-          <a href="/">{photo.loginUsuario}</a>
+          <Link to={`/timeline/${photo.loginUsuario}`}>
+            {photo.loginUsuario}
+          </Link>
         </figcaption>
       </figure>
       <time className="foto-data">{photo.horario}</time>
@@ -19,13 +22,13 @@ function PhotoInfo({ photo }) {
     <div className="foto-info">
       <div className="foto-info-likes">
         { photo.likers.map(liker => {
-          return <a href="/" key={liker.login}>{liker.login},</a>;
+          return <Link to={`/timeline/${liker.login}`} key={liker.login}>{liker.login},</Link>;
         })}
         curtiram
       </div>
 
       <p className="foto-info-legenda">
-        <a className="foto-info-autor" href="/">autor </a>
+        <a className="foto-info-autor" href="/timeline">autor </a>
         {photo.comentario}
       </p>
 
@@ -33,7 +36,9 @@ function PhotoInfo({ photo }) {
         { photo.comentarios.map(comment => {
           return (
             <li className="comentario" key={comment.id}>
-              <a className="foto-info-autor" href="/">{ comment.login } </a>
+              <Link to={`/timeline/${comment.login}`}>
+                { comment.login }
+              </Link>
               { comment.texto }
             </li>
           )  
