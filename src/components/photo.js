@@ -21,7 +21,7 @@ function PhotoHeader({ photo }) {
 class PhotoInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = { likers: this.props.photo.likers };
+    this.state = { likers: this.props.photo.likers, comments: this.props.photo.comentarios };
   }
 
   componentDidMount() {
@@ -35,6 +35,11 @@ class PhotoInfo extends Component {
           this.setState({ likers: otherLikers });
         }
       }
+    });
+
+    Pubsub.subscribe('do-comment', (topic, infoComment) => {
+      if (this.props.photo.id === infoComment.photoId)
+        this.setState({comments: this.state.comments.concat(infoComment.comment)});
     });
   }
   
@@ -55,7 +60,7 @@ class PhotoInfo extends Component {
         </p>
 
         <ul className="foto-info-comentarios">
-          { photo.comentarios.map(comment => {
+          { this.state.comments.map(comment => {
             return (
               <li className="comentario" key={comment.id}>
                 <Link to={`/timeline/${comment.login}`}>
@@ -93,14 +98,39 @@ class PhotoUpdates extends Component {
       });
   }
 
+  doComment(event) {
+    event.preventDefault();
+    console.log('doComent..', this.comment.value);
+    fetch(`http://localhost:8080/api/fotos/${this.props.photo.id}/comment?X-AUTH-TOKEN=${localStorage.getItem('authToken')}`,
+        {
+          method: 'POST',
+          body: JSON.stringify({ texto: this.comment.value }),
+          headers: new Headers({
+            'Content-type':'application/json'
+          }),
+        }
+      ).then(response => {
+        if(response.ok) {
+            return response.json();
+        } else {
+            throw new Error("não foi possível realizar o like da foto");
+        }
+      })
+      .then(comment => {
+        this.setState({ likeada: !this.state.likeada });
+        Pubsub.publish('do-comment', { photoId: this.props.photo.id, comment});
+      });
+  }
+
   render() {
     const { likeada } = this.state;
     return (
       <section className="fotoAtualizacoes">
         <a onClick={this.like.bind(this)} href="#like"
           className={likeada ? "fotoAtualizacoes-like-ativo" : "fotoAtualizacoes-like"}>Likar</a>
-        <form className="fotoAtualizacoes-form">
-          <input type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo"/>
+        <form className="fotoAtualizacoes-form" onSubmit={this.doComment.bind(this)}>
+          <input type="text" placeholder="Adicione um comentário..."
+            className="fotoAtualizacoes-form-campo" ref={input => this.comment = input}/>
           <input type="submit" value="Comentar!" className="fotoAtualizacoes-form-submit"/>
         </form>
       </section>
